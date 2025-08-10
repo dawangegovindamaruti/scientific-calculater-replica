@@ -11,7 +11,16 @@
         console.log('currentvalue:', currentvalue)
         const convertedvalue = currentvalue
         .replace("x","*")   
-        .replace ("%" ,'*0.01');
+        .replace ("%" ,'*0.01')
+        .replace('sin', 'Math.sin')
+        .replace('cos', 'Math.cos')
+        .replace( 'ln','Math.log')
+        .replace('π','Math.PI')
+        .replace('log','Math.log10')
+        .replace('e','Math.E')
+        .replace('tan','Math.tan')
+        .replace('√','Math.sqrt')
+
         console.log('convertedvalue:', convertedvalue)
         const result = eval(convertedvalue);
         currentvalue = result.toString();
@@ -21,8 +30,9 @@
       const button = buttons[i];
       button.addEventListener('click', function () {
         const value = button.innerText;
-
-        if(value == "AC") {
+       
+        try{
+            if(value == "AC") {
             currentvalue= "";
             display.value = currentvalue;
         }else if( value == "="){
@@ -32,6 +42,12 @@
               display.value = currentvalue;
         }
        
+        } catch(error){
+            console.error(error);
+            currentvalue = "Error";
+             console.log = currentvalue;
+        }
+      
       })
     }
    
